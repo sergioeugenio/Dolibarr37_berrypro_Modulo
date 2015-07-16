@@ -21,7 +21,8 @@
  */
 
 /**
- *  \file       htdocs/product/composition/card.php
+ *  \file       berrypro/card.php
+ *  \filebase       htdocs/product/composition/card.php
  *  \ingroup    product
  *  \brief      Page de la fiche produit
  */
@@ -31,9 +32,10 @@
 require_once DOL_DOCUMENT_ROOT.'/core/lib/product.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/product/class/product.class.php';
 require_once DOL_DOCUMENT_ROOT.'/categories/class/categorie.class.php';
+
 if (! $res) $res=@include("../../../main.inc.php");		// For "custom" directory
 dol_include_once("/berrypro/class/fournisseur.product.class.php");
-
+dol_include_once("/berrypro/lib/product_bp.lib.php");
 
 $langs->load("bills");
 $langs->load("products");
@@ -167,10 +169,11 @@ if ($action == 'search')
 //print $sql;
 
 
-llxHeader("","",$langs->trans("CardProduct".$product->type));
+//llxHeader("","",$langs->trans("CardProduct".$product->type));
+llxHeader("","",$langs->trans("CardProduct2".$product->type));
 
 $head=product_prepare_head($product, $user);
-$titre=$langs->trans("CardProduct".$product->type);
+$titre=$langs->trans("CardProduct2".$product->type);
 $picto=($product->type==1?'service':'product');
 dol_fiche_head($head, 'subproduct', $titre, 0, $picto);
 
@@ -401,11 +404,12 @@ if ($id > 0 || ! empty($ref))
 				}
 				print '</tr>';
 			}
+      //Última línea con el Total
 			print '<tr>';
-			print '<td colspan="2">'.$langs->trans("TotalBuyingPriceMin").': ';
+			print '<td colspan="7" align="right"><b>'.$langs->trans("TotalBuyingPriceMin").': </b>';
 			if ($atleastonenotdefined) print $langs->trans("Unknown").' ('.$langs->trans("SomeSubProductHaveNoPrices").')';
 			print '</td>';
-			print '<td align="right">'.($atleastonenotdefined?'':price($total,'','',0,0,-1,$conf->currency)).'</td>';
+			print '<td align="right"><b>'.($atleastonenotdefined?'':price($total,'','',0,0,-1,$conf->currency)).'</b></td>';
 			if (! empty($conf->stock->enabled)) print '<td class="liste_total" align="right">&nbsp;</td>';
 			print '</tr>';
 			print '</table>';
@@ -540,7 +544,7 @@ if ($id > 0 || ! empty($ref))
 						if($product->is_sousproduit($id, $objp->rowid))
 						{
 							$addchecked = ' checked="checked"';
-							$qty=$product->is_sousproduit_qty;
+							$qty=$head->is_sousproduit_qty;
 						}
 						else
 						{

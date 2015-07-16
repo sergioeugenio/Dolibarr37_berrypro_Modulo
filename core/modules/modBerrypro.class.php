@@ -94,9 +94,9 @@ class modBerrypro extends DolibarrModules
 		$this->const = array();
 
 		// Array to add new pages in new tabs
-  	$this->tabs = array(
-			'product:-associatedproducts',
-			'product:+ProdComp:Prod_Comp2:Prueba2:/berrypro/card.php?id=__ID__'
+		$this->tabs = array(
+			//'product:-AssociatedProducts',
+			'product:+ProdComp:CardProduct2:@berrypro:Prueba2:/berrypro/card.php?id=__ID__'
 		);
 
         // Dictionnaries
@@ -117,7 +117,39 @@ class modBerrypro extends DolibarrModules
 				'titre'=>'Berrypro',
 				'mainmenu'=>'products',
 				'leftmenu'=>'berrypro',
-				'url'=>'', //compta/index.php
+				'url'=>'/berrypro/index.php',
+				'langs'=>'berrypro@berrypro',
+				'position'=>90,
+				'enabled'=>'$conf->berrypro->enabled',
+				'perms'=>'1',
+				'target'=>'',
+				'user'=>0);
+
+		$r++; //1
+
+		//Menu left into compta
+		$this->menu[$r]=array('fk_menu'=>'fk_mainmenu=accountancy',
+				'type'=>'left',
+				'titre'=>'Berrypro',
+				'mainmenu'=>'accountancy',
+				'leftmenu'=>'berrypro',
+				'url'=>'/berrypro/index.php',
+				'langs'=>'berrypro@berrypro',
+				'position'=>100,
+				'enabled'=>'$conf->berrypro->enabled',
+				'perms'=>'1',
+				'target'=>'',
+				'user'=>0);
+
+		$r++; //1
+
+		//Menu left into commercial
+		$this->menu[$r]=array('fk_menu'=>'fk_mainmenu=commercial',
+				'type'=>'left',
+				'titre'=>'Berrypro',
+				'mainmenu'=>'commercial',
+				'leftmenu'=>'berrypro',
+				'url'=>'/berrypro/index.php',
 				'langs'=>'berrypro@berrypro',
 				'position'=>110,
 				'enabled'=>'$conf->berrypro->enabled',
@@ -127,56 +159,56 @@ class modBerrypro extends DolibarrModules
 
 		$r++; //1
 
-		// Example to declare another Left Menu entry:
-		$this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=products,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
+		// Elemto de menú izqdo en Financiera para el listado de Fras Pte de Cte vs Proov
+		$this->menu[$r]=array('fk_menu'=>'fk_mainmenu=accountancy,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
 				'type'=>'left',			// This is a Left menu entry
-				'titre'=>'Titulito',
-				'mainmenu'=>'products',
-				'url'=>'/berrypro/card.php',
+				'titre'=>'Fras Pte Cte vs Prov',
+				'mainmenu'=>'accountancy',
+				'url'=>'/berrypro/facturepte.php',
 				'langs'=>'berrypro@berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-				'position'=>111,
+				'position'=>102,
 				'enabled'=>'1',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
 				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
 				'target'=>'',
 				'user'=>0);				// 0=Menu for internal users, 1=external users, 2=both
 		$r++; //2
 
-		// Example to declare another Left Menu entry:
-		$this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=products,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
+		// Elemento de menú izqdo en Comercial para el listado de Presupuestos con Nota Pública
+		$this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=commercial,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
 				'type'=>'left',			// This is a Left menu entry
-				'titre'=>'CustomerOrders',
-				'mainmenu'=>'products',
-				'url'=>'/berrypro/customerorders.php',
+				'titre'=>'Presupuestos con NotPub',
+				'mainmenu'=>'commercial',
+				'url'=>'/berrypro/list_prod_notpub.php',
 				'langs'=>'berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-				'position'=>111,
+				'position'=>112,
 				'enabled'=>'$conf->commande->enabled',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
 				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
 				'target'=>'',
 				'user'=>0);				// 0=Menu for internal users, 1=external users, 2=both
 		$r++; //3
 
-		// Example to declare another Left Menu entry:
-		$this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=products,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
+		// Elemento de menú izqdo en Comercial para el listado de Facturas con Nota Pública
+		$this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=commercial,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
 				'type'=>'left',			// This is a Left menu entry
-				'titre'=>'Sendings',
-				'mainmenu'=>'products',
-				'url'=>'/berrypro/shipment.php',
+				'titre'=>'Facturas con NotPub',
+				'mainmenu'=>'commercial',
+				'url'=>'/berrypro/facture_prov_notpub.php',
 				'langs'=>'berrypro@berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-				'position'=>111,
+				'position'=>114,
 				'enabled'=>'$conf->expedition->enabled',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
 				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
 				'target'=>'',
 				'user'=>0);				// 0=Menu for internal users, 1=external users, 2=both
 		$r++; //4
 
-		// Example to declare another Left Menu entry:
+		// Elemento del menú izqdo en Productos para mostrar el listado de productos con:
 		$this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=products,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
 				'type'=>'left',			// This is a Left menu entry
-				'titre'=>'SupplierOrders',
+				'titre'=>'Loquesea',
 				'mainmenu'=>'products',
 				'url'=>'/berrypro/supplierorders.php',
 				'langs'=>'berrypro@berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-				'position'=>111,
+				'position'=>92,
 				'enabled'=>'$conf->fournisseur->enabled',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
 				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
 				'target'=>'',
