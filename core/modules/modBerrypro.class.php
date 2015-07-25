@@ -58,7 +58,7 @@ class modBerrypro extends DolibarrModules
 		// Module description, used if translation string 'ModuleXXXDesc' not found (where XXX is value of numeric property 'numero' of module)
 		$this->description = "BerryPro";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-		$this->version = '3.7';
+		$this->version = '3.6';
 		// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)
 		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
 		// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
@@ -95,7 +95,7 @@ class modBerrypro extends DolibarrModules
 
 		// Array to add new pages in new tabs
 		$this->tabs = array(
-			//'product:-AssociatedProducts',
+			'product:-subproduct',
 			'product:+ProdComp:CardProduct2:@berrypro:Prueba2:/berrypro/card.php?id=__ID__'
 		);
 
@@ -172,6 +172,20 @@ class modBerrypro extends DolibarrModules
 				'target'=>'',
 				'user'=>0);				// 0=Menu for internal users, 1=external users, 2=both
 		$r++; //2
+
+		$this->menu[$r]=array('fk_menu'=>'fk_mainmenu=accountancy,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
+				'type'=>'left',			// This is a Left menu entry
+				'titre'=>'Facturas Proveedor Ptes',
+				'mainmenu'=>'accountancy',
+				'url'=>'/berrypro/list_fact_imp.php',
+				'langs'=>'berrypro@berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+				'position'=>104,
+				'enabled'=>'1',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
+				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
+				'target'=>'',
+				'user'=>0);				// 0=Menu for internal users, 1=external users, 2=both
+		$r++; //2
+
 
 		// Elemento de menú izqdo en Comercial para el listado de Presupuestos con Nota Pública
 		$this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=commercial,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)

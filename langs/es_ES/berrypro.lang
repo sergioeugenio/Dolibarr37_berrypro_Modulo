@@ -39,8 +39,7 @@ AutoWithdrawal=Se realizará la petición de domiciliación de la factura si la 
 ShowOriginRef=Mostrar la referencia del documento origen (solo pedidos de cliente, envíos y presupuestos)
 Sendings=Envíos
 CloseProcessedShipmentsAutomatically=Clasificar automáticamente como "Cerrado" los envíos seleccionados
-CardProduct2=BP_Prodto_Compto
-AssociatedProducts=Producto Compuesto
+CardProduct2=Producto Compuesto
 
 #About
 AboutInfo=Este módulo ha sido desarrollado y distribuido por Sergio Eugenio Castilla para BerryPro S.L.

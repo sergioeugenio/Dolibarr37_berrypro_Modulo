@@ -175,7 +175,7 @@ llxHeader("","",$langs->trans("CardProduct2".$product->type));
 $head=product_prepare_head($product, $user);
 $titre=$langs->trans("CardProduct2".$product->type);
 $picto=($product->type==1?'service':'product');
-dol_fiche_head($head, 'subproduct', $titre, 0, $picto);
+dol_fiche_head($head, 'ProdComp', 'subproduct', $titre, 0, $picto);
 
 
 if ($id > 0 || ! empty($ref))
@@ -349,14 +349,17 @@ if ($id > 0 || ! empty($ref))
 			print '<td>Precio Min. Compra</td>';
 			print '<td>Subtotal</td>';
 			print '</tr>';
+
+      $var=true;
 			foreach($prods_arbo as $value)
 			{
-				$productstatic->id=$value['id'];
+				$var= !$var;
+        $productstatic->id=$value['id'];
 				$productstatic->type=$value['type'];
 				//print '<pre>'.$productstatic->ref.'</pre>';
 				//print $productstatic->getNomUrl(1).'<br>';
 				//var_dump($value);
-				print '<tr class="impair">';
+				print '<tr '.$bc[$var].'>';
 				// Columna 1 Referencia de BerryPro
 				print '<td>'.$value[ref].'</td>';
 				if ($value['level'] <= 1)
