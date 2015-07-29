@@ -105,6 +105,10 @@ class modBerrypro extends DolibarrModules
         // Boxes
 		// Add here list of php file(s) stored in includes/boxes that contains class to show a box.
         $this->boxes = array();			// List of boxes
+				$this->boxes[0]['file']='box_supplier_orders_pend.php@berrypro';
+				$this->boxes[0]['note']='Pedidos de Proveedor pendiente de recibir';
+				$this->boxes[1]['file']='box_commandes_conf.php@berrypro';
+				$this->boxes[1]['note']='Pedidos de Clientes confirmados y en expedición';
 		$r=0;
 
 		// Permissions
@@ -209,6 +213,20 @@ class modBerrypro extends DolibarrModules
 				'url'=>'/berrypro/facture_prov_notpub.php',
 				'langs'=>'berrypro@berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
 				'position'=>114,
+				'enabled'=>'$conf->expedition->enabled',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
+				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
+				'target'=>'',
+				'user'=>0);				// 0=Menu for internal users, 1=external users, 2=both
+		$r++; //4
+
+		// Elemento de menú izqdo en Comercial para el listado de Pedidos de clientes pendientes de facturar o en expedición
+		$this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=commercial,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
+				'type'=>'left',			// This is a Left menu entry
+				'titre'=>'Pedidos de cliente pte Facturar',
+				'mainmenu'=>'commercial',
+				'url'=>'/berrypro/list_commande.php',
+				'langs'=>'berrypro@berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+				'position'=>116,
 				'enabled'=>'$conf->expedition->enabled',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
 				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
 				'target'=>'',

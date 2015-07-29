@@ -1,3 +1,20 @@
+Funcionalidades a añadir:
+- Personalizar las páginas de inicio de cada uno para que pueda ver la información que le interesa: Compras, Financiera, Comercial, etc
+    -Financiera: OK BOX que muestre los últimos pedidos de clientes confirmados o en expedición. A partir de ellos consultar si se ha realizado la factura correspondiente o no.
+                    BOX que muestre una previsión de ingresos. Facturas pendiente de pago y fecha vencimiento.
+                    BOX que muestre una previsión de pagos del mes en corriente.
+    -Compras:    OK BOX Pedidos a Proveedores modificados.
+                 OK BOX Pedidos de proveedores que van a llegar en las fechas más próximas.
+                 OK BOX Pedidos de clientes modificados. Eliminar importe y poner Ref Cte
+                 OK BOX Pedidos de Clientes con Status 1, 2 0 3
+                    BOX Albaranes de clientes modificados.
+                    BOX que muestre sobre los pedidos de cliente, los productos que no están en stock y que deben pedirse a proveedor.
+    - Ofertas:  OK Últimos Presupuestos Modificados
+
+- Ver la manera de crear una Previsión de Pagos Cobros lo más aproximada a la realidad y eficiente.
+
+- Modificar las plantillas de Presupuesto / Pedidos /Facturas para uqe incluyan las condiciones de pago, forma de pago, transporte, instalación incluidas.
+
 Condiciones de Uso, Mantenimiento y Asistencia
 
 info@berrypro.eu
