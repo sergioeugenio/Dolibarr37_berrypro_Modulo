@@ -186,11 +186,9 @@ if ($resql)
 	print '<tr class="liste_titre">';
 	print '<td class="liste_titre">&nbsp;';
 	print '<td class="liste_titre">&nbsp;';
-	print '<td class="liste_titre">&nbsp;';
-	print '<td class="liste_titre">&nbsp;';
 	print '<td class="liste_titre" aign="right">Filtrar Estado: ';
-	print '<td class="liste_titre" colspan=5 align="right">';
-	$formorder->selectSupplierOrderStatus($search_status,1,'search_status');
+	print '<td class="liste_titre" colspan=7 align="right">';
+	$formorder->selectSupplierOrderStatus($search_st,1,'search_status');
 	print '</td>';
 	print "</tr>\n";
 
