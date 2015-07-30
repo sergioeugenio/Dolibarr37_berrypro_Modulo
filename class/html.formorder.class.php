@@ -48,12 +48,13 @@ class FormOrder
 	/**
      *    Return combo list of differents status of a orders
      *
+     *    @param	array	$selected   Preselected values
      *    @param	string	$selected   Preselected value
      *    @param	int		$short		Use short labels
      *    @param	string	$hmlname	Name of HTML select element
      *    @return	void
      */
-    function selectSupplierOrderStatus($selected='', $short=0, $hmlname='order_status')
+    function selectSupplierOrderStatus($selected=array(), $short=0, $hmlname='order_status')
     {
         /*print '<select class="flat" name="'.$hmlname.'">';
         print '<option value="-1">&nbsp;</option>';
@@ -69,7 +70,7 @@ class FormOrder
 	    foreach($statustohow as $key)	    	
         {	
         	$stat=CommandeFournisseur::LibStatut($key,$short);
-        	print '<input name="statuts[]" type="checkbox"  value="'.$key.'" >&nbsp;'.$stat.' - ';
+        	print '<input name="statuts[]" type="checkbox"  value="'.$key.'"'.($selected[$key] == $key?' selected="selected"':'').'>&nbsp;'.$stat.' - ';
         	print $key;
         }
         
