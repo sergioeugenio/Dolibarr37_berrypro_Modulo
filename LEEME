@@ -8,7 +8,11 @@ Funcionalidades a añadir:
                  OK BOX Pedidos de clientes modificados. Eliminar importe y poner Ref Cte
                  OK BOX Pedidos de Clientes con Status 1, 2 0 3
                     BOX Albaranes de clientes modificados.
-                    BOX que muestre sobre los pedidos de cliente, los productos que no están en stock y que deben pedirse a proveedor.
+                    BOX que muestre sobre
+                        Listado de pedidos de cliente
+                          Detalle de productos de los pedidos
+                            Subproductos de los productos indicando los que están por debajo de stock
+                            y que no están pendientes de recibir.
     - Ofertas:  OK Últimos Presupuestos Modificados
 
 - Ver la manera de crear una Previsión de Pagos Cobros lo más aproximada a la realidad y eficiente.

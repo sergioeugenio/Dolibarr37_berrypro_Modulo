@@ -40,13 +40,15 @@ ShowOriginRef=Mostrar la referencia del documento origen (solo pedidos de client
 Sendings=Envíos
 CloseProcessedShipmentsAutomatically=Clasificar automáticamente como "Cerrado" los envíos seleccionados
 CardProduct2=Producto Compuesto
-BoxLatestSupplierOrdersPtes=Pedidos a Proveedor pendientes de recibir
+BoxLatestSupplierOrdersPtes=BP-Pedidos a Proveedor Ptes recibir
 latestsupplierorderspends=Ultimos Pedidos a Proveedor pendientes de recibir
 BoxTitleLatest=Ultimos Pedidos a Proveedor pendientes de recibir
 lastcustomerorders=Últimos pedidos confirmados y en expedición
 BoxLastCustomerOrders=Últimos pedidos confirmados
+LastModifiedCustomersOrders=BP-Últimos Pedidos de Clientes Confdos/En Exped
 BoxTitleLast=Últimos pedidos confirmados 2
 ListOfOrders=Listado de pedidos pendiente de facturar.
+BoxTitleOldestUnpaidCustomerBills=BP-Facturas de Clientes Pendientes de Cobro
 
 
 #About

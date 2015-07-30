@@ -145,7 +145,7 @@ class box_supplier_orders extends ModeleBoxes
      */
     function showBox($head = null, $contents = null)
     {
-        parent::showBox($this->info_box_head, $this->info_box_contents);
+        parent::showBox($this->info_box_head." - Ver mas...", $this->info_box_contents);
     }
 
 }

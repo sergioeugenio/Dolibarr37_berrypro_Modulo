@@ -49,7 +49,7 @@ class box_commandes extends ModeleBoxes
      *  @param	int		$max        Maximum number of records to load
      *  @return	void
      */
-    function loadBox($max=5)
+    function loadBox($max=20)
     {
         global $user, $langs, $db, $conf;
 
@@ -61,6 +61,15 @@ class box_commandes extends ModeleBoxes
         $userstatic = new User($db);
 
         $this->info_box_head = array('text' => $langs->trans("BoxTitleLast".($conf->global->MAIN_LASTBOX_ON_OBJECT_DATE?"":"Modified")."CustomerOrders",$max));
+
+/* 
+Consulta de Pedidos de Cliente con Referencia del cliente, Fecha de entrega, Factura (SI/NO), validados.
+SELECT s.nom as name, s.rowid as socid, c.ref_client, c.tms, c.rowid, c.date_commande, c.date_livraison, c.fk_statut, c.fk_user_valid, c.facture, c.total_ht
+FROM llx_societe as s, llx_commande as c
+WHERE c.fk_soc = s.rowid
+AND c.fk_statut = 1
+ORDER BY c.tms DESC, c.date_livraison DESC
+*/
 
         if ($user->rights->commande->lire)
         {

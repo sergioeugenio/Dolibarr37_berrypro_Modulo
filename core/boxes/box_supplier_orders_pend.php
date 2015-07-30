@@ -20,9 +20,9 @@
 
 /**
  * \file       htdocs/custom/berrypro/core/boxes/box_supplier_orders_pend.php
- * \filebase       htdocs/core/boxes/box_supplier_orders.php
+ * \filebase   htdocs/core/boxes/box_supplier_orders.php
  * \ingroup    fournisseurs
- * \brief      Module that generates the latest supplier orders box
+ * \brief      Listado de los últimos pedidos de Proveedor pendientes de recibir
  */
 include_once DOL_DOCUMENT_ROOT.'/core/boxes/modules_boxes.php';
 
@@ -59,7 +59,11 @@ class box_supplier_orders_pend extends ModeleBoxes
         include_once DOL_DOCUMENT_ROOT.'/fourn/class/fournisseur.commande.class.php';
         $supplierorderstatic=new CommandeFournisseur($db);
 
-        $this->info_box_head = array('text' => "Pedidos a Proveedor pendientes de recibir"); //$langs->trans("BoxTitleLatest".($conf->global->MAIN_LASTBOX_ON_OBJECT_DATE?"":"Modified")."SupplierOrders", $max));
+        $url2="http://localhost/dolibarr37/htdocs/fourn/commande/list.php?leftmenu=orders_suppliers&statut=3";
+        $this->info_box_head = array(
+            'text' => $langs->trans("BoxTitleLatest".($conf->global->MAIN_LASTBOX_ON_OBJECT_DATE?"":"Modified")."SupplierOrders", $max).
+            ' - <a href="'.$url2.'" class="bold"> Ver m&aacute;s...</a>'
+            );
 
         if ($user->rights->fournisseur->commande->lire)
         {

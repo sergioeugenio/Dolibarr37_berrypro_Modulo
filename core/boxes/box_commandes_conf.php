@@ -34,7 +34,7 @@ class box_commandes_conf extends ModeleBoxes
 {
     var $boxcode="lastcustomerorders";
     var $boximg="object_order";
-    var $boxlabel="Ultimos Pedidos de clientes \"confirmados\" o \"en expedicion\"";
+    var $boxlabel="BP-Ultimos Pedidos de clientes \"confirmados\" o \"en expedicion\"";//Título en la casilla de selección desplegable
     var $depends = array("commande");
 
 	  var $db;
@@ -60,13 +60,11 @@ class box_commandes_conf extends ModeleBoxes
         $commandestatic=new Commande($db);
         $userstatic = new User($db);
 
-        $titulo = "Ultimos pedidos confirm/en exped ptes de facturar";
         $url2 = DOL_URL_ROOT."/custom/berrypro/list_commande.php?";
 
-        $this->info_box_head = array (
-        //'text' => $langs->trans("BoxTitleLast".($conf->global->MAIN_LASTBOX_ON_OBJECT_DATE?"":"Modified")."CustomerOrders",$max).
-        'text' => $titulo.
-        ' - <a href="'.$url2.'" class="bold"> Ver m&aacute;s </a>'
+        $this->info_box_head = array (//Título del panel
+        'text' => $langs->trans("LastModifiedCustomersOrders", $max).
+        ' - <a href="'.$url2.'" class="bold"> Ver m&aacute;s...</a>'
         );
 
         if ($user->rights->commande->lire)

@@ -109,6 +109,8 @@ class modBerrypro extends DolibarrModules
 				$this->boxes[0]['note']='Pedidos de Proveedor pendiente de recibir';
 				$this->boxes[1]['file']='box_commandes_conf.php@berrypro';
 				$this->boxes[1]['note']='Pedidos de Clientes confirmados y en expedición';
+				$this->boxes[2]['file']='box_factures_impag.php@berrypro';
+				$this->boxes[2]['note']='BP-Facturas de Clientes Pendientes de Cobro';
 		$r=0;
 
 		// Permissions

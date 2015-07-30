@@ -27,12 +27,12 @@
  *	\filebase       htdocs/commande/list.php
  *	\ingroup    commande
  *	\brief      Listado de Productos sin stock suficiente que se encuentran en pedidos de clientes validados
- SELECT cd.rowid, cd.fk_commande, cd.fk_product, cd.description, st.reel as stock, s.nom as name, cd.qty as pedido, c.ref, s.client
- FROM `llx_commandedet` as cd, `llx_commande`as c, `llx_societe`as s, `llx_product_stock`as st
- WHERE c.rowid = cd.fk_commande
- AND s.rowid = c.fk_soc
- AND cd.fk_product = st.fk_product
- AND c.fk_statut IN (1,2,3)
+ * SELECT cd.rowid, cd.fk_commande, cd.fk_product, cd.description, st.reel as stock, s.nom as name, cd.qty as pedido, c.ref, s.client
+ * FROM `llx_commandedet` as cd, `llx_commande`as c, `llx_societe`as s, `llx_product_stock`as st
+ * WHERE c.rowid = cd.fk_commande
+ * AND s.rowid = c.fk_soc
+ * AND cd.fk_product = st.fk_product
+ * AND c.fk_statut IN (1,2,3)
  */
 
 
