@@ -66,6 +66,7 @@ if (GETPOST("button_removefilter_x") || GETPOST("button_removefilter")) // Both 
 	$search_user='';
 	$search_ttc='';
 	$search_status='';
+	$search_st=array();
 }
 
 if ($search_status == '') $search_status=-1;
