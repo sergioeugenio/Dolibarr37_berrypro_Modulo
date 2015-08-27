@@ -192,6 +192,18 @@ class modBerrypro extends DolibarrModules
 				'user'=>0);				// 0=Menu for internal users, 1=external users, 2=both
 		$r++; //2
 
+		$this->menu[$r]=array('fk_menu'=>'fk_mainmenu=accountancy,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
+				'type'=>'left',			// This is a Left menu entry
+				'titre'=>'Informe IVA',
+				'mainmenu'=>'accountancy',
+				'url'=>'/berrypro/informe_iva.php',
+				'langs'=>'berrypro@berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+				'position'=>106,
+				'enabled'=>'1',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
+				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
+				'target'=>'',
+				'user'=>0);				// 0=Menu for internal users, 1=external users, 2=both
+		$r++; //2
 
 		// Elemento de menú izqdo en Comercial para el listado de Presupuestos con Nota Pública
 		$this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=commercial,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)

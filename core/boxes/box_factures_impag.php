@@ -63,7 +63,7 @@ class box_factures_impag extends ModeleBoxes
 		$url2=DOL_URL_ROOT."/compta/facture/impayees.php?option=late";
 		$this->info_box_head = array( //Título del panel
 			'text' => $langs->trans ("BoxTitleOldestUnpaidCustomerBills", $max).
-		' - <a href="'.$url2.'" class="bold"> Ver m&aacute;s...</a>'
+			' - <a href="'.$url2.'" class="bold"> Ver m&aacute;s...</a>'
 		);
 
 		if ($user->rights->facture->lire)
