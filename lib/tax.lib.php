@@ -308,7 +308,8 @@ function vat_by_date($db, $y, $q, $date_start, $date_end, $modetax, $direction, 
             if ($date_start && $date_end) $sql.= " AND f.datef >= '".$db->idate($date_start)."' AND f.datef <= '".$db->idate($date_end)."'";
             $sql.= " AND (d.product_type = 0";                              // Limit to products
             $sql.= " AND d.date_start is null AND d.date_end IS NULL)";     // enhance detection of service
-            $sql.= " ORDER BY d.rowid, d.".$fk_facture;
+//          $sql.= " ORDER BY d.rowid, d.".$fk_facture;
+            $sql.= " ORDER BY f.".$invoicefieldref.", d.rowid";
         }
     }
     else    // Option vat on delivery for goods (payments) and payments for services
@@ -356,7 +357,8 @@ function vat_by_date($db, $y, $q, $date_start, $date_end, $modetax, $direction, 
             if ($date_start && $date_end) $sql.= " AND f.datef >= '".$db->idate($date_start)."' AND f.datef <= '".$db->idate($date_end)."'";
             $sql.= " AND (d.product_type = 0";                              // Limit to products
             $sql.= " AND d.date_start is null AND d.date_end IS NULL)";     // enhance detection of service
-            $sql.= " ORDER BY d.rowid, d.".$fk_facture;
+//          $sql.= " ORDER BY d.rowid, d.".$fk_facture;
+            $sql.= " ORDER BY f.".$invoicefieldref.", d.rowid";
             //print $sql;
         }
     }
@@ -472,7 +474,8 @@ function vat_by_date($db, $y, $q, $date_start, $date_end, $modetax, $direction, 
             if ($date_start && $date_end) $sql.= " AND f.datef >= '".$db->idate($date_start)."' AND f.datef <= '".$db->idate($date_end)."'";
             $sql.= " AND (d.product_type = 1";                              // Limit to services
             $sql.= " OR d.date_start is NOT null OR d.date_end IS NOT NULL)";       // enhance detection of service
-            $sql.= " ORDER BY d.rowid, d.".$fk_facture;
+//          $sql.= " ORDER BY d.rowid, d.".$fk_facture;
+            $sql.= " ORDER BY f.".$invoicefieldref.", d.rowid";
         }
     }
     else    // Option vat on delivery for goods (payments) and payments for services
@@ -525,7 +528,8 @@ function vat_by_date($db, $y, $q, $date_start, $date_end, $modetax, $direction, 
             if ($date_start && $date_end) $sql.= " AND pa.datep >= '".$db->idate($date_start)."' AND pa.datep <= '".$db->idate($date_end)."'";
             $sql.= " AND (d.product_type = 1";                              // Limit to services
             $sql.= " OR d.date_start is NOT null OR d.date_end IS NOT NULL)";       // enhance detection of service
-            $sql.= " ORDER BY d.rowid, d.".$fk_facture.", pf.rowid";
+//          $sql.= " ORDER BY d.rowid, d.".$fk_facture;
+            $sql.= " ORDER BY f.".$invoicefieldref.", d.rowid";
         }
     }
 

@@ -131,7 +131,7 @@ class modBerrypro extends DolibarrModules
 				'target'=>'',
 				'user'=>0);
 
-		$r++; //1
+		$r++;
 
 		//Menu left into compta
 		$this->menu[$r]=array('fk_menu'=>'fk_mainmenu=accountancy',
@@ -147,7 +147,7 @@ class modBerrypro extends DolibarrModules
 				'target'=>'',
 				'user'=>0);
 
-		$r++; //1
+		$r++;
 
 		//Menu left into commercial
 		$this->menu[$r]=array('fk_menu'=>'fk_mainmenu=commercial',
@@ -163,7 +163,7 @@ class modBerrypro extends DolibarrModules
 				'target'=>'',
 				'user'=>0);
 
-		$r++; //1
+		$r++;
 
 		// Elemto de menú izqdo en Financiera para el listado de Fras Pte de Cte vs Proov
 		$this->menu[$r]=array('fk_menu'=>'fk_mainmenu=accountancy,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
@@ -172,12 +172,12 @@ class modBerrypro extends DolibarrModules
 				'mainmenu'=>'accountancy',
 				'url'=>'/berrypro/facturepte.php',
 				'langs'=>'berrypro@berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-				'position'=>102,
+				'position'=>121,
 				'enabled'=>'1',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
 				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
 				'target'=>'',
 				'user'=>0);				// 0=Menu for internal users, 1=external users, 2=both
-		$r++; //2
+		$r++;
 
 		$this->menu[$r]=array('fk_menu'=>'fk_mainmenu=accountancy,fk_leftmenu=berrypro',		// Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
 				'type'=>'left',			// This is a Left menu entry
@@ -185,7 +185,7 @@ class modBerrypro extends DolibarrModules
 				'mainmenu'=>'accountancy',
 				'url'=>'/berrypro/list_fact_imp.php',
 				'langs'=>'berrypro@berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-				'position'=>104,
+				'position'=>122,
 				'enabled'=>'1',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
 				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
 				'target'=>'',
@@ -198,7 +198,7 @@ class modBerrypro extends DolibarrModules
 				'mainmenu'=>'accountancy',
 				'url'=>'/berrypro/informe_iva.php',
 				'langs'=>'berrypro@berrypro',	// Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-				'position'=>106,
+				'position'=>123,
 				'enabled'=>'1',			// Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
 				'perms'=>'1',			// Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
 				'target'=>'',

@@ -220,8 +220,8 @@ $i=0;
 $x_coll = vat_by_date($db, 0, 0, $date_start, $date_end, $modetax, 'sell');
 $x_paye = vat_by_date($db, 0, 0, $date_start, $date_end, $modetax, 'buy');
 
-$firephp->fb($x_coll, "Array".$x_coll);
-$firephp->fb($x_paye, "Array".$x_paye);
+$firephp->fb($x_coll, "x_coll = ");
+$firephp->fb($x_paye, "x_paye = ");
 
 
 if (! is_array($x_coll) || ! is_array($x_paye))
@@ -359,6 +359,9 @@ else
 
 			foreach($x_both[$rate]['coll']['detail'] as $index => $fields)
 			{
+				$firephp->fb($index, "index=");
+				$firephp->fb($fields, "fields=");
+				$firephp->fb($last, "last=");
 				// Define type
 				$type=($fields['dtype']?$fields['dtype']:$fields['ptype']);
 				// Try to enhance type detection using date_start and date_end for free lines where type
@@ -366,107 +369,121 @@ else
 				if (! empty($fields['ddate_start'])) $type=1;
 				if (! empty($fields['ddate_end'])) $type=1;
 
-				//Si el número de factura es el mismo sumamos los importes
-				$previo = $fields['id'];
-				$firephp->fb($previo);
-		
-				$var=!$var;
-				print '<tr '.$bc[$var].'>';
-
-				$firephp->fb($fields, "fields");
-
-
-				// Ref
-				print '<td class="nowrap" align="left">'.$fields['link'].'</td>';
-
-				// Customer
-				print '<td class="nowrap" align="left">'.$fields['nom'].'</td>';
-
-				// Description
-				print '<td align="left">';
-				if ($fields['pid'])
+				if ($index == 0 || $fields['id'] == $last) 
 				{
-					$product_static->id=$fields['pid'];
-					$product_static->ref=$fields['pref'];
-					$product_static->type=$fields['ptype'];
-					print $product_static->getNomUrl(1);
-					if (dol_string_nohtmltag($fields['descr'])) print ' - '.dol_trunc(dol_string_nohtmltag($fields['descr']),25);
-				}
-				else
-				{
-					if ($type) $text = img_object($langs->trans('Service'),'service');
-					else $text = img_object($langs->trans('Product'),'product');
-		            if (preg_match('/^\((.*)\)$/',$fields['descr'],$reg))
-		            {
-		                if ($reg[1]=='DEPOSIT') $fields['descr']=$langs->transnoentitiesnoconv('Deposit');
-		                elseif ($reg[1]=='CREDIT_NOTE') $fields['descr']=$langs->transnoentitiesnoconv('CreditNote');
-		                else $fields['descr']=$langs->transnoentitiesnoconv($reg[1]);
-		            }
-					print $text.' '.dol_trunc(dol_string_nohtmltag($fields['descr']),25);
+					$var=!$var;
+					print '<tr '.$bc[$var].'>';
 
-					// Show range
-					print_date_range($fields['ddate_start'],$fields['ddate_end']);
-				}
-				print '</td>';
+					// Ref
+					print '<td class="nowrap" align="left">'.$fields['link'].'</td>';
 
-				// Total HT
-				if ($modetax == 0)
-				{
-					print '<td class="nowrap" align="right">';
-					print price($fields['totalht']);
-					if (price2num($fields['ftotal_ttc']))
+					// Customer
+					print '<td class="nowrap" align="left">'.$fields['nom'].'</td>';
+
+					// Description
+					print '<td align="left">';
+					if ($fields['pid'])
 					{
-						//print $fields['dtotal_ttc']."/".$fields['ftotal_ttc']." - ";
-						$ratiolineinvoice=($fields['dtotal_ttc']/$fields['ftotal_ttc']);
-						//print ' ('.round($ratiolineinvoice*100,2).'%)';
+						$product_static->id=$fields['pid'];
+						$product_static->ref=$fields['pref'];
+						$product_static->type=$fields['ptype'];
+						print $product_static->getNomUrl(1);
+						if (dol_string_nohtmltag($fields['descr'])) print ' - '.dol_trunc(dol_string_nohtmltag($fields['descr']),25);
+					}
+					else
+					{
+						if ($type) $text = img_object($langs->trans('Service'),'service');
+						else $text = img_object($langs->trans('Product'),'product');
+			            if (preg_match('/^\((.*)\)$/',$fields['descr'],$reg))
+			            {
+			                if ($reg[1]=='DEPOSIT') $fields['descr']=$langs->transnoentitiesnoconv('Deposit');
+			                elseif ($reg[1]=='CREDIT_NOTE') $fields['descr']=$langs->transnoentitiesnoconv('CreditNote');
+			                else $fields['descr']=$langs->transnoentitiesnoconv($reg[1]);
+			            }
+						print $text.' '.dol_trunc(dol_string_nohtmltag($fields['descr']),25);
+
+						// Show range
+						print_date_range($fields['ddate_start'],$fields['ddate_end']);
 					}
 					print '</td>';
-				}
 
-				// Payment
-				$ratiopaymentinvoice=1;
-				if ($modetax == 0)
-				{
-					if (isset($fields['payment_amount']) && $fields['ftotal_ttc']) $ratiopaymentinvoice=($fields['payment_amount']/$fields['ftotal_ttc']);
+					// Total HT
+					if ($modetax == 0)
+					{
+						print '<td class="nowrap" align="right">';
+						print price($fields['totalht']);
+						if (price2num($fields['ftotal_ttc']))
+						{
+							//print $fields['dtotal_ttc']."/".$fields['ftotal_ttc']." - ";
+							$ratiolineinvoice=($fields['dtotal_ttc']/$fields['ftotal_ttc']);
+							//print ' ('.round($ratiolineinvoice*100,2).'%)';
+						}
+						print '</td>';
+					}
+
+					// Payment
+					$ratiopaymentinvoice=1;
+					if ($modetax == 0)
+					{
+						if (isset($fields['payment_amount']) && $fields['ftotal_ttc']) $ratiopaymentinvoice=($fields['payment_amount']/$fields['ftotal_ttc']);
+						print '<td class="nowrap" align="right">';
+						//print $fields['totalht']."-".$fields['payment_amount']."-".$fields['ftotal_ttc'];
+						if ($fields['payment_amount'] && $fields['ftotal_ttc'])
+						{
+							$payment_static->id=$fields['payment_id'];
+							print $payment_static->getNomUrl(2);
+						}
+						if ($type == 0)
+						{
+							print $langs->trans("NotUsedForGoods");
+						}
+						else {
+							print $fields['payment_amount'];
+							if (isset($fields['payment_amount'])) print ' ('.round($ratiopaymentinvoice*100,2).'%)';
+						}
+						print '</td>';
+					}
+
+					// Total collected
 					print '<td class="nowrap" align="right">';
-					//print $fields['totalht']."-".$fields['payment_amount']."-".$fields['ftotal_ttc'];
-					if ($fields['payment_amount'] && $fields['ftotal_ttc'])
-					{
-						$payment_static->id=$fields['payment_id'];
-						print $payment_static->getNomUrl(2);
-					}
-					if ($type == 0)
-					{
-						print $langs->trans("NotUsedForGoods");
-					}
-					else {
-						print $fields['payment_amount'];
-						if (isset($fields['payment_amount'])) print ' ('.round($ratiopaymentinvoice*100,2).'%)';
-					}
+					$temp_ht=$fields['totalht'];
+					if ($type == 1) $temp_ht=$fields['totalht']*$ratiopaymentinvoice;
+					print price(price2num($temp_ht,'MT'),1);
 					print '</td>';
+
+					// VAT
+					print '<td class="nowrap" align="right">';
+					$temp_vat=$fields['vat'];
+					if ($type == 1) $temp_vat=$fields['vat']*$ratiopaymentinvoice;
+					print price(price2num($temp_vat,'MT'),1);
+					//print price($fields['vat']);
+					print '</td>';
+					print '</tr>';
+
+					$semi_total_ht += $fields['totalht'];
+					$semi_vat += $fields['vat'];
+
+					$subtot_coll_total_ht += $temp_ht;
+					$subtot_coll_vat      += $temp_vat;
+					$x_coll_sum           += $temp_vat;
+				} 
+				else 
+				{
+					print '<tr class="liste_total">';
+        			print '<td></td>';
+        			print '<td>&nbsp;</td>';
+       				print '<td align="right">'.$langs->trans("SubTotal").':</td>';
+       				print '<td align="right">'.price(price2num($semi_total_ht,'MT')).'</td>';
+        			print '<td class="nowrap" align="right">'.price(price2num($semi_vat,'MT')).'</td>';
+        			print '</tr>';
+        			$semi_total_ht = 0;
+					$semi_vat = 0;
 				}
-
-				// Total collected
-				print '<td class="nowrap" align="right">';
-				$temp_ht=$fields['totalht'];
-				if ($type == 1) $temp_ht=$fields['totalht']*$ratiopaymentinvoice;
-				print price(price2num($temp_ht,'MT'),1);
-				print '</td>';
-
-				// VAT
-				print '<td class="nowrap" align="right">';
-				$temp_vat=$fields['vat'];
-				if ($type == 1) $temp_vat=$fields['vat']*$ratiopaymentinvoice;
-				print price(price2num($temp_vat,'MT'),1);
-				//print price($fields['vat']);
-				print '</td>';
-				print '</tr>';
-
-				$subtot_coll_total_ht += $temp_ht;
-				$subtot_coll_vat      += $temp_vat;
-				$x_coll_sum           += $temp_vat;
-
+				
+					
+			$last = $fields['id'];
 			}
+
 
 		}
         // Total customers for this vat rate
